@@ -14,36 +14,46 @@ namespace Collaress
 {
     public partial class VentanaGrafico : Form
     {
+        private static Series HorasComida = new Series("Horas que comió");
+        private static Series VecesComida = new Series("Veces que comió");
+
         public VentanaGrafico()
         {
             InitializeComponent();
         }
 
-        private async void VentanaGrafico_Load(object sender, EventArgs e)
+        private void VentanaGrafico_Load(object sender, EventArgs e)
         {
-
-            Series horasComida = new Series("Horas que comió");
-            Series vecesComida = new Series("Veces que comió");
-            vecesComida.ChartType = horasComida.ChartType = SeriesChartType.Spline;
-
-            chart1.ChartAreas[0].AxisX.LabelStyle.Angle = -90;
-            chart1.Series.Add(horasComida);
-            chart1.Series.Add(vecesComida);
-
             ComunicacionSerial.AbrirPuerto(puerto);
-            await Task.Run(() =>
-            {
-                while (true)
-                {
-                    ComunicacionSerial.LeerDatos(puerto);
-                    ActualizadorGrafica.Actualizar(chart1, horasComida, vecesComida);
-                }
-            });
+            VecesComida.ChartType = HorasComida.ChartType = SeriesChartType.Spline;
         }
 
         private void VentanaGrafico_FormClosing(object sender, FormClosingEventArgs e)
         {
             ComunicacionSerial.CerrarPuerto(puerto);
         }
+
+        private void puerto_DataReceived(object sender, SerialDataReceivedEventArgs e)
+        {
+            ComunicacionSerial.LeerDatos(puerto);
+            ActualizadorGrafica.Actualizar(chart1, HorasComida, VecesComida);
+        }
+            //Series horasComida = new Series("Horas que comió");
+            //Series vecesComida = new Series("Veces que comió");
+            //vecesComida.ChartType = horasComida.ChartType = SeriesChartType.Spline;
+
+            //chart1.ChartAreas[0].AxisX.LabelStyle.Angle = -90;
+            //chart1.Series.Add(horasComida);
+            //chart1.Series.Add(vecesComida);
+
+            //ComunicacionSerial.AbrirPuerto(puerto);
+            //await Task.Run(() =>
+            //{
+            //    while (true)
+            //    {
+            //        ComunicacionSerial.LeerDatos(puerto);
+            //        ActualizadorGrafica.Actualizar(chart1, horasComida, vecesComida);
+            //    }
+            //});
     }
 }
