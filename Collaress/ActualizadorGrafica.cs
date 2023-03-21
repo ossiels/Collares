@@ -11,13 +11,12 @@ namespace Collaress
     internal abstract class ActualizadorGrafica
     {
         // TODO: que se muestren los valores de los datos
-        public static void Actualizar(Chart grafica, Series horasComida, Series vecesComida)
+        public static void Actualizar(Chart grafica, Series horasComida, Series vecesComida, string vaca)
         {
-            ///////////////vecesComida.IsValueShownAsLabel = horasComida.IsValueShownAsLabel = true;
             horasComida.Points.Clear();
             vecesComida.Points.Clear();
 
-            List<string[]> datos = ObtenerDatos();
+            List<string[]> datos = ObtenerDatos(vaca);
             foreach (var dato in datos)
             {
                 horasComida.Points.AddXY(dato[0], Convert.ToDouble(dato[1]));
@@ -26,20 +25,12 @@ namespace Collaress
         }
 
         // TODO: que la ruta cambie dependiendo de la id
-        // Obtiene los ultimos 20 datos solamente
-        private static List<string[]> ObtenerDatos()
+        private static List<string[]> ObtenerDatos(string vaca)
         {
             string ruta = CsvUtileria.csvPath;
-            string vaca = @"vaca95.csv";
-            string rutaCompleta = ruta + vaca;
+            string rutaCompleta = ruta + vaca + ".csv";
 
             string[] lineas = File.ReadAllLines(rutaCompleta).Skip(1).ToArray();
-            bool masDeVeinteLineas = lineas.Length > 20;
-            
-            if (masDeVeinteLineas)
-            {
-                lineas = lineas.Skip(lineas.Length - 20).ToArray();
-            }
 
             List<string[]> list = new List<string[]>();
             foreach (string line in lineas)
