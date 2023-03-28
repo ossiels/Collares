@@ -38,7 +38,6 @@ namespace Collaress
             this.lblVacaId = new System.Windows.Forms.Label();
             this.puerto = new System.IO.Ports.SerialPort(this.components);
             this.temporizador = new System.Windows.Forms.Timer(this.components);
-            this.btnImprimir = new System.Windows.Forms.Button();
             this.listVacas = new System.Windows.Forms.ListBox();
             this.txtBusqueda = new System.Windows.Forms.TextBox();
             this.panel1 = new System.Windows.Forms.Panel();
@@ -52,6 +51,7 @@ namespace Collaress
             this.pictureBox5 = new System.Windows.Forms.PictureBox();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.btnBusqueda = new System.Windows.Forms.Button();
+            this.btnCrearWord = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.graficoVacaInfo)).BeginInit();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -112,23 +112,6 @@ namespace Collaress
             this.temporizador.Interval = 5000;
             this.temporizador.Tick += new System.EventHandler(this.temporizador_Tick);
             // 
-            // btnImprimir
-            // 
-            this.btnImprimir.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnImprimir.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(153)))), ((int)(((byte)(87)))));
-            this.btnImprimir.BackgroundImage = global::Collaress.Properties.Resources.printing;
-            this.btnImprimir.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.btnImprimir.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
-            this.btnImprimir.FlatAppearance.BorderSize = 2;
-            this.btnImprimir.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnImprimir.Font = new System.Drawing.Font("Noto Sans", 8.249999F);
-            this.btnImprimir.Location = new System.Drawing.Point(503, 329);
-            this.btnImprimir.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
-            this.btnImprimir.Name = "btnImprimir";
-            this.btnImprimir.Size = new System.Drawing.Size(35, 35);
-            this.btnImprimir.TabIndex = 2;
-            this.btnImprimir.UseVisualStyleBackColor = false;
-            // 
             // listVacas
             // 
             this.listVacas.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
@@ -156,14 +139,12 @@ namespace Collaress
             this.txtBusqueda.Size = new System.Drawing.Size(162, 33);
             this.txtBusqueda.TabIndex = 4;
             this.tipBusqueda.SetToolTip(this.txtBusqueda, "Ingrese el número ID de la vaca");
-            this.txtBusqueda.TextChanged += new System.EventHandler(this.txtBusqueda_TextChanged);
             this.txtBusqueda.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtBusqueda_KeyPress);
-            this.txtBusqueda.KeyUp += new System.Windows.Forms.KeyEventHandler(this.txtBusqueda_KeyUp);
             // 
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.Color.Transparent;
-            this.panel1.Controls.Add(this.btnImprimir);
+            this.panel1.Controls.Add(this.btnCrearWord);
             this.panel1.Controls.Add(this.graficoVacaInfo);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel1.Location = new System.Drawing.Point(0, 0);
@@ -212,7 +193,6 @@ namespace Collaress
             this.pictureBox1.Size = new System.Drawing.Size(806, 10);
             this.pictureBox1.TabIndex = 9;
             this.pictureBox1.TabStop = false;
-            this.pictureBox1.Click += new System.EventHandler(this.pictureBox1_Click);
             // 
             // pictureBox6
             // 
@@ -223,7 +203,6 @@ namespace Collaress
             this.pictureBox6.Size = new System.Drawing.Size(38, 10);
             this.pictureBox6.TabIndex = 9;
             this.pictureBox6.TabStop = false;
-            this.pictureBox6.Click += new System.EventHandler(this.pictureBox1_Click);
             // 
             // pictureBox3
             // 
@@ -233,7 +212,6 @@ namespace Collaress
             this.pictureBox3.Size = new System.Drawing.Size(38, 10);
             this.pictureBox3.TabIndex = 9;
             this.pictureBox3.TabStop = false;
-            this.pictureBox3.Click += new System.EventHandler(this.pictureBox1_Click);
             // 
             // pictureBox4
             // 
@@ -245,7 +223,6 @@ namespace Collaress
             this.pictureBox4.Size = new System.Drawing.Size(10, 374);
             this.pictureBox4.TabIndex = 9;
             this.pictureBox4.TabStop = false;
-            this.pictureBox4.Click += new System.EventHandler(this.pictureBox1_Click);
             // 
             // pictureBox5
             // 
@@ -255,7 +232,6 @@ namespace Collaress
             this.pictureBox5.Size = new System.Drawing.Size(111, 10);
             this.pictureBox5.TabIndex = 9;
             this.pictureBox5.TabStop = false;
-            this.pictureBox5.Click += new System.EventHandler(this.pictureBox1_Click);
             // 
             // pictureBox2
             // 
@@ -266,7 +242,6 @@ namespace Collaress
             this.pictureBox2.Size = new System.Drawing.Size(111, 10);
             this.pictureBox2.TabIndex = 9;
             this.pictureBox2.TabStop = false;
-            this.pictureBox2.Click += new System.EventHandler(this.pictureBox1_Click);
             // 
             // btnBusqueda
             // 
@@ -283,6 +258,24 @@ namespace Collaress
             this.btnBusqueda.TabIndex = 5;
             this.btnBusqueda.UseVisualStyleBackColor = false;
             this.btnBusqueda.Click += new System.EventHandler(this.btnBusqueda_Click);
+            // 
+            // btnCrearWord
+            // 
+            this.btnCrearWord.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnCrearWord.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(153)))), ((int)(((byte)(87)))));
+            this.btnCrearWord.BackgroundImage = global::Collaress.Properties.Resources.word;
+            this.btnCrearWord.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.btnCrearWord.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
+            this.btnCrearWord.FlatAppearance.BorderSize = 2;
+            this.btnCrearWord.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnCrearWord.Font = new System.Drawing.Font("Noto Sans", 8.249999F);
+            this.btnCrearWord.Location = new System.Drawing.Point(503, 329);
+            this.btnCrearWord.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
+            this.btnCrearWord.Name = "btnCrearWord";
+            this.btnCrearWord.Size = new System.Drawing.Size(35, 35);
+            this.btnCrearWord.TabIndex = 2;
+            this.btnCrearWord.UseVisualStyleBackColor = false;
+            this.btnCrearWord.Click += new System.EventHandler(this.btnImprimir_Click);
             // 
             // VentanaGrafico
             // 
@@ -327,7 +320,7 @@ namespace Collaress
         private System.Windows.Forms.Label lblVacaId;
         private System.Windows.Forms.Timer temporizador;
         private System.IO.Ports.SerialPort puerto;
-        private System.Windows.Forms.Button btnImprimir;
+        private System.Windows.Forms.Button btnCrearWord;
         private System.Windows.Forms.ListBox listVacas;
         private System.Windows.Forms.TextBox txtBusqueda;
         private System.Windows.Forms.Button btnBusqueda;

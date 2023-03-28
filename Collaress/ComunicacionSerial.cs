@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO.Ports;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -10,20 +11,27 @@ namespace Collaress
 {
     internal class ComunicacionSerial
     {
-        public static void AbrirPuerto(SerialPort puerto)
+        private static SerialPort puertoSerial;
+
+        public static void SetPuerto(SerialPort puerto)
         {
-            if (puerto.IsOpen) puerto.Close();
+            puertoSerial = puerto;
+        }
+
+        public static void AbrirPuerto()
+        {
+            if (puertoSerial.IsOpen) puertoSerial.Close();
 
             try
             {
-                puerto.Open();
+                puertoSerial.Open();
             }
             catch (Exception error)
             {
                 MessageBox.Show(error.Message);
             }
         }
-        public static void LeerDatos(SerialPort puerto)
+        public static void LeerDatos()
         {
             //string rawDatosRecibidos = puerto.ReadExisting();
             //string[] lineas = rawDatosRecibidos.Split('\n');
@@ -38,7 +46,7 @@ namespace Collaress
             //    CsvUtileria.GuardarEnCsv(id, horasComida, vecesComida);
             //}
 
-            string linea = puerto.ReadLine();
+            string linea = puertoSerial.ReadLine();
             string[] datosNumericos = linea.Split('#');
 
             try
@@ -57,9 +65,9 @@ namespace Collaress
             //TODO rodear con trycatch
         }
 
-        public static void CerrarPuerto(SerialPort puerto)
+        public static void CerrarPuerto()
         {
-            puerto.Close();
+            puertoSerial.Close();
         }
     }
 }
