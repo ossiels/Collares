@@ -10,7 +10,6 @@ namespace Collaress
 {
     internal abstract class ActualizadorGrafica
     {
-        // TODO: que se muestren los valores de los datos
         public static void Actualizar(Chart grafica, Series horasComida, Series vecesComida, string vaca)
         {
             horasComida.Points.Clear();
@@ -24,8 +23,9 @@ namespace Collaress
             }
         }
 
-        // TODO: que la ruta cambie dependiendo de la id
-        private static List<string[]> ObtenerDatos(string vaca)
+        // TODO: que sea arreglo en lugar de lista
+        // TODO: poner este metodo en la clase de CsvUtileria
+        public static List<string[]> ObtenerDatos(string vaca)
         {
             string ruta = CsvUtileria.csvPath;
             string rutaCompleta = ruta + vaca + ".csv";

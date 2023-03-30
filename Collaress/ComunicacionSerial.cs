@@ -33,19 +33,6 @@ namespace Collaress
         }
         public static void LeerDatos()
         {
-            //string rawDatosRecibidos = puerto.ReadExisting();
-            //string[] lineas = rawDatosRecibidos.Split('\n');
-
-            //foreach (string linea in lineas)
-            //{
-            //    string[] datoNumerico = linea.Split('#');
-            //    int id = Convert.ToInt32(datoNumerico[0]);
-            //    double horasComida = Convert.ToDouble(datoNumerico[1]);
-            //    int vecesComida = Convert.ToInt32(datoNumerico[2]);
-
-            //    CsvUtileria.GuardarEnCsv(id, horasComida, vecesComida);
-            //}
-
             string linea = puertoSerial.ReadLine();
             string[] datosNumericos = linea.Split('#');
 
@@ -60,9 +47,6 @@ namespace Collaress
             {
                 //MessageBox.Show("Hubo un error al recibir los datos");
             }
-
-
-            //TODO rodear con trycatch
         }
 
         public static void CerrarPuerto()

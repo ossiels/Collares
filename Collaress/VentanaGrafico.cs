@@ -20,7 +20,7 @@ namespace Collaress
         private Series vecesComida = new Series("Veces que comió");
         private Color colorGridGrafica = Color.LightGray;
 
-        private string rutaCarpetaVacas = @"C:\Users\ossie\Desktop\Vacas\";
+        //private string rutaCarpetaVacas = @"C:\Users\ossie\Desktop\Vacas\";
         
         public VentanaGrafico()
         {
@@ -53,7 +53,7 @@ namespace Collaress
 
         private void LlenarListVacas()
         {
-            DirectoryInfo dirInfo = new DirectoryInfo(rutaCarpetaVacas);
+            DirectoryInfo dirInfo = new DirectoryInfo(CsvUtileria.csvPath);
             FileInfo[] files = FiltrarArchivos(dirInfo);
 
             int[] arrayIDs = new int[0];
@@ -173,7 +173,7 @@ namespace Collaress
 
         private void btnImprimir_Click(object sender, EventArgs e)
         {
-            CrearWord.Crear();
+            CrearWord.Crear(lblVacaId.Text);
         }
     }
 }

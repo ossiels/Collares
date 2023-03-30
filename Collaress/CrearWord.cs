@@ -13,11 +13,14 @@ namespace Collaress
 {
     public class CrearWord
     {
-        public static void Crear(string path)
+        private static string path = @"C:\Users\ossie\Desktop\prueba\";
+
+        public static void Crear(string vaca)
         {
-            var templateName = "cale.docx";
+            var fecha = DateTime.Today.ToString("yyyy-MM-dd");
+            var templateName = "plantilla.docx";
             var templatePath = path + templateName;
-            var finalFile = "resultado.docx";
+            var finalFile = $"{vaca}_{fecha}.docx";
             var finalFilePath = path + finalFile;
 
             File.Copy(templatePath, finalFilePath, true);
@@ -30,10 +33,19 @@ namespace Collaress
                     docText = sr.ReadToEnd();
                 }
 
-                Regex regexNombre = new Regex("_Nombre_");
-                Regex regexPais = new Regex("_Pais_");
-                docText = regexNombre.Replace(docText, "Ossiel");
-                docText = regexPais.Replace(docText, "México");
+                string[][] datos = ActualizadorGrafica.ObtenerDatos(vaca).ToArray();
+                for (int i = 0; i < datos.Length; i++)
+                {
+                    
+                    //dato[0] es la fecha, [1] son las horas que la vaca comio y [2] son las veces
+                    Regex regexFecha = new Regex($"fec{i}");
+                    Regex regexVeces = new Regex($"veces{i}");
+                    Regex regexHoras = new Regex($"hrs{i}");
+
+                    docText = regexFecha.Replace(docText, datos[i][0]);
+                    docText = regexHoras.Replace(docText, datos[i][1]);
+                    docText = regexVeces.Replace(docText, datos[i][2]);
+                }
 
                 using (StreamWriter sw = new StreamWriter(wordDoc.MainDocumentPart.GetStream(FileMode.Create)))
                 {
