@@ -13,7 +13,9 @@ namespace Collaress
 {
     public class CrearWord
     {
-        private static string path = @"C:\Users\ossie\Desktop\prueba\";
+        //C:\Users\HP PAVILION DV6\Desktop\Word Collares\
+        //C:\Users\ossie\Desktop\prueba\
+        private static string path = @"C:\Users\HP PAVILION DV6\Desktop\Word Collares\";
 
         public static void Crear(string vaca)
         {

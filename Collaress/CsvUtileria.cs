@@ -13,7 +13,7 @@ namespace Collaress
         //TODO tal vez hacer una clase en comun con los valores que van a usar varias clases
         public static string csvPath = @"C:\Users\ossie\Desktop\Vacas\";
         
-        private static int MaxNumDeDatos = 10;
+        private static int maxNumDeDatos = 10;
 
         public static void GuardarEnCsv(int id, double horas, int vecesQueComio)
         {
@@ -38,7 +38,7 @@ namespace Collaress
             datos[1] = string.Empty;
             datos = datos.Where(x => x != string.Empty).ToArray();
             
-            if(numeroDeDatos > MaxNumDeDatos)
+            if(numeroDeDatos > maxNumDeDatos)
             {
                 string rutaArchivoNuevo = ruta.Insert(ruta.Length - 4, "_temp");
                 File.WriteAllLines(rutaArchivoNuevo, datos);
@@ -65,7 +65,7 @@ namespace Collaress
         private static void BorrarDatos(string rutaCompleta)
         {
             int numDeDatos = File.ReadAllLines(rutaCompleta).Length - 1;
-            if (numDeDatos > MaxNumDeDatos)
+            if (numDeDatos > maxNumDeDatos)
             {
                 //Borra el primer conjunto de datos
                 string[] lineas = File.ReadAllLines(rutaCompleta).Skip(2).ToArray();
