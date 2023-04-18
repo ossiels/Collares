@@ -1,14 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.IO;
+using System.Linq;
 using System.Windows.Forms.DataVisualization.Charting;
 
-namespace Collaress
+namespace Utileria
 {
-    internal abstract class ActualizadorGrafica
+    internal abstract class UtileriaGrafica
     {
         public static void Actualizar(Chart grafica, Series horasComida, Series vecesComida, string vaca)
         {

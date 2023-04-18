@@ -1,11 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO.Ports;
-using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
+using Utileria;
 
 namespace Collaress
 {
@@ -31,6 +27,7 @@ namespace Collaress
                 MessageBox.Show(error.Message);
             }
         }
+
         public static void LeerDatos()
         {
             string linea = puertoSerial.ReadLine();

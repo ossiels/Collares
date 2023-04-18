@@ -1,33 +1,26 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
+﻿using DocumentFormat.OpenXml.Packaging;
+using System;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Text.RegularExpressions;
-using DocumentFormat.OpenXml.Packaging;
-using System.Windows.Forms;
+using Utileria;
 
 namespace Collaress
 {
     public class CrearWord
     {
-        //C:\Users\HP PAVILION DV6\Desktop\Word Collares\
-        //C:\Users\ossie\Desktop\prueba\
-        private static string path = @"C:\Users\HP PAVILION DV6\Desktop\Word Collares\";
+        private static string direccionPlantilla = Path.Combine(Path.GetFullPath(@"..\..\"), @"Resources\plantilla_reporte.docx");
+        private static string direccionDestino = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
 
         public static void Crear(string vaca)
         {
+            bool fileExists = File.Exists(direccionPlantilla);
             var fecha = DateTime.Today.ToString("yyyy-MM-dd");
-            var templateName = "plantilla.docx";
-            var templatePath = path + templateName;
-            var finalFile = $"{vaca}_{fecha}.docx";
-            var finalFilePath = path + finalFile;
+            var archivoFinal = $@"\{vaca}_{fecha}.docx";
+            var rutaArchivoFinal = direccionDestino + archivoFinal;
 
-            File.Copy(templatePath, finalFilePath, true);
+            File.Copy(direccionPlantilla, rutaArchivoFinal, true);
 
-            using (WordprocessingDocument wordDoc = WordprocessingDocument.Open(finalFilePath, true))
+            using (WordprocessingDocument wordDoc = WordprocessingDocument.Open(rutaArchivoFinal, true))
             {
                 string docText = null;
                 using (StreamReader sr = new StreamReader(wordDoc.MainDocumentPart.GetStream()))
@@ -35,7 +28,7 @@ namespace Collaress
                     docText = sr.ReadToEnd();
                 }
 
-                string[][] datos = ActualizadorGrafica.ObtenerDatos(vaca).ToArray();
+                string[][] datos = UtileriaGrafica.ObtenerDatos(vaca).ToArray();
                 for (int i = 0; i < datos.Length; i++)
                 {
                     
@@ -53,21 +46,6 @@ namespace Collaress
                 {
                     sw.Write(docText);
                 }
-            }
-            //Imprimir(finalFilePath);
-        }
-
-        private static void Imprimir(string filePath)
-        {
-            using (PrintDialog pd = new PrintDialog())
-            {
-                pd.ShowDialog();
-                ProcessStartInfo info = new ProcessStartInfo(filePath);
-                info.Verb = "PrintTo";
-                info.Arguments = pd.PrinterSettings.PrinterName;
-                info.CreateNoWindow = true;
-                info.WindowStyle = ProcessWindowStyle.Hidden;
-                Process.Start(info);
             }
         }
     }

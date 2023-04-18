@@ -82,7 +82,7 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ActualizadorGrafica.cs" />
+    <Compile Include="UtileriaGrafica.cs" />
     <Compile Include="ComunicacionSerial.cs" />
     <Compile Include="CsvUtileria.cs" />
     <Compile Include="CrearWord.cs" />
@@ -126,10 +126,14 @@
     <None Include="Resources\lupa.png" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\plantilla_reporte.docx" />
     <None Include="Resources\printing.png" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\word.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="csvs\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

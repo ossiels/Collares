@@ -1,27 +1,21 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.IO;
 using System.IO.Ports;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Windows.Forms.DataVisualization.Charting;
+using Utileria;
 
 namespace Collaress
 {
     public partial class VentanaGrafico : Form
     {
-
         private Series horasComida = new Series("Horas que comió");
         private Series vecesComida = new Series("Veces que comió");
         private Color colorGridGrafica = Color.LightGray;
 
-        //private string rutaCarpetaVacas = @"C:\Users\ossie\Desktop\Vacas\";
-        
         public VentanaGrafico()
         {
             InitializeComponent();
@@ -92,7 +86,7 @@ namespace Collaress
         {
             //Hace que el grafico sea de linea
             vecesComida.ChartType = horasComida.ChartType = SeriesChartType.Line;
-            
+
             //Añade las series horasComida y vecesComida al grafico
             graficoVacaInfo.Series.Add(horasComida);
             graficoVacaInfo.Series.Add(vecesComida);
@@ -116,9 +110,23 @@ namespace Collaress
 
         private void ActualizarGrafico()
         {
-            string vacaSeleccionada = ObtenerIdSeleccionada().ToLower();
-            ActualizadorGrafica.Actualizar(graficoVacaInfo, horasComida, vecesComida, vacaSeleccionada);
+            string vacaSeleccionada = lblVacaId.Text.ToLower();
+            UtileriaGrafica.Actualizar(graficoVacaInfo, horasComida, vecesComida, vacaSeleccionada);
         }
+
+        private string ObtenerIdSeleccionada()
+        {
+            return listVacas.SelectedItem.ToString();
+        }
+
+        public bool CarpetaVacia(string path)
+        {
+            return !Directory.EnumerateFileSystemEntries(path).Any();
+        }
+
+
+
+        //Eventos
 
         private void puerto_DataReceived(object sender, SerialDataReceivedEventArgs e)
         {
@@ -127,26 +135,22 @@ namespace Collaress
 
         private void temporizador_Tick(object sender, EventArgs e)
         {
-            ActualizarGrafico();
-        }
-
-        private void listVacas_SelectedValueChanged(object sender, EventArgs e)
-        {
-            lblVacaId.Text = ObtenerIdSeleccionada();
-            ActualizarGrafico();
-        }
-
-        private string ObtenerIdSeleccionada()
-        {
-            return listVacas.SelectedItem.ToString();
+            try
+            {
+                ActualizarGrafico();
+            }
+            catch (FileNotFoundException)
+            {
+                
+            }
         }
 
         private void txtBusqueda_KeyPress(object sender, KeyPressEventArgs e)
         {
             char teclaPresionada = e.KeyChar;
             bool esNumero = Char.IsDigit(teclaPresionada);
-            bool esTeclaBorrar = teclaPresionada == (char) Keys.Back;
-            bool esEnter = teclaPresionada == (char) Keys.Enter;
+            bool esTeclaBorrar = teclaPresionada == (char)Keys.Back;
+            bool esEnter = teclaPresionada == (char)Keys.Enter;
 
             if (esEnter)
             {
@@ -163,7 +167,7 @@ namespace Collaress
         {
             string busqueda = txtBusqueda.Text;
             bool txtBoxTieneTexto = !String.IsNullOrEmpty(busqueda);
-            
+
             if (txtBoxTieneTexto)
             {
                 busqueda = busqueda.Insert(0, "Vaca");
@@ -171,10 +175,17 @@ namespace Collaress
             }
         }
 
+        private void listVacas_SelectedValueChanged(object sender, EventArgs e)
+        {
+            lblVacaId.Text = ObtenerIdSeleccionada();
+            ActualizarGrafico();
+        }
+
         private void btnImprimir_Click(object sender, EventArgs e)
         {
             CrearWord.Crear(lblVacaId.Text);
         }
+
     }
 }
 

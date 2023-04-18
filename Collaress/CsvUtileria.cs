@@ -1,18 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using CsvHelper;
+using System;
 using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using CsvHelper;
 
-namespace Collaress
+namespace Utileria
 {
     internal class CsvUtileria
     {
         //TODO tal vez hacer una clase en comun con los valores que van a usar varias clases
-        public static string csvPath = @"C:\Users\ossie\Desktop\Vacas\";
-        
+        public static string csvPath = @"csvs\";
+
         private static int maxNumDeDatos = 10;
 
         public static void GuardarEnCsv(int id, double horas, int vecesQueComio)
@@ -37,8 +34,8 @@ namespace Collaress
             int numeroDeDatos = datos.Length - 1;
             datos[1] = string.Empty;
             datos = datos.Where(x => x != string.Empty).ToArray();
-            
-            if(numeroDeDatos > maxNumDeDatos)
+
+            if (numeroDeDatos > maxNumDeDatos)
             {
                 string rutaArchivoNuevo = ruta.Insert(ruta.Length - 4, "_temp");
                 File.WriteAllLines(rutaArchivoNuevo, datos);
