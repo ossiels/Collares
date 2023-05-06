@@ -21,8 +21,6 @@ namespace Utileria
             }
         }
 
-        // TODO: que sea arreglo en lugar de lista
-        // TODO: poner este metodo en la clase de CsvUtileria
         public static List<string[]> ObtenerDatos(string vaca)
         {
             string ruta = CsvUtileria.csvPath;

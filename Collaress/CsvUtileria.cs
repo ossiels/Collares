@@ -8,7 +8,7 @@ namespace Utileria
     internal class CsvUtileria
     {
         //TODO tal vez hacer una clase en comun con los valores que van a usar varias clases
-        public static string csvPath = @"csvs\";
+        public static string csvPath = @"..\..\csvs\";
 
         private static int maxNumDeDatos = 10;
 
@@ -57,31 +57,5 @@ namespace Utileria
             }
             File.SetAttributes(ruta, FileAttributes.Hidden);
         }
-
-        //Tal vez usar
-        private static void BorrarDatos(string rutaCompleta)
-        {
-            int numDeDatos = File.ReadAllLines(rutaCompleta).Length - 1;
-            if (numDeDatos > maxNumDeDatos)
-            {
-                //Borra el primer conjunto de datos
-                string[] lineas = File.ReadAllLines(rutaCompleta).Skip(2).ToArray();
-                lineas = lineas.Where(x => Array.IndexOf(lineas, x) != 1).ToArray();
-                File.WriteAllLines(rutaCompleta, lineas);
-            }
-        }
     }
 }
-
-//ruta = ruta.Insert(ruta.Length - 4, "_HID");
-
-//using (var streamWriter = new StreamWriter(ruta))
-//{
-//    using (var csvWriter = new CsvWriter(streamWriter, System.Globalization.CultureInfo.InvariantCulture))
-//    {
-//        var vacas = VacaInfo.GetVacas(horas, vecesQueComio);
-//        csvWriter.Context.RegisterClassMap<VacaInfoClassMap>();
-//        csvWriter.WriteRecords(vacas);
-//        File.SetAttributes(ruta, FileAttributes.Hidden);
-//    }
-//}

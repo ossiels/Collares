@@ -143,6 +143,10 @@ namespace Collaress
             {
                 
             }
+            catch (Exception)
+            {
+                throw;
+            }
         }
 
         private void txtBusqueda_KeyPress(object sender, KeyPressEventArgs e)
@@ -188,41 +192,3 @@ namespace Collaress
 
     }
 }
-
-//Series horasComida = new Series("Horas que comió");
-//Series vecesComida = new Series("Veces que comió");
-//vecesComida.ChartType = horasComida.ChartType = SeriesChartType.Spline;
-
-//chart1.ChartAreas[0].AxisX.LabelStyle.Angle = -90;
-//chart1.Series.Add(horasComida);
-//chart1.Series.Add(vecesComida);
-
-//ComunicacionSerial.AbrirPuerto(puerto);
-//await Task.Run(() =>
-//{
-//    while (true)
-//    {
-//        ComunicacionSerial.LeerDatos(puerto);
-//        ActualizadorGrafica.Actualizar(chart1, horasComida, vecesComida);
-//    }
-//});
-
-//string textoDeBusqueda = txtBusqueda.Text;
-//bool txtBoxTieneTexto = !String.IsNullOrEmpty(textoDeBusqueda);
-//if (txtBoxTieneTexto)
-//{
-//    foreach (var str in list)
-//    {
-//        if (str.Contains(textoDeBusqueda))
-//        {
-//            listVacas.Items.Add(str);
-//        }
-//    }
-//}
-//else if (textoDeBusqueda == "")
-//{
-//    foreach (var item in list)
-//    {
-//        listVacas.Items.Add(textoDeBusqueda);
-//    }
-//}
