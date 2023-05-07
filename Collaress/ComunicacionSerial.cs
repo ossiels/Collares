@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO.Ports;
+using System.Text.RegularExpressions;
 using System.Windows.Forms;
 using Utileria;
 
@@ -31,19 +32,25 @@ namespace Collaress
         public static void LeerDatos()
         {
             string linea = puertoSerial.ReadLine();
-            string[] datosNumericos = linea.Split('#');
+
+            Regex regex = new Regex(@"#(.*?)#");
+            MatchCollection datosNumericos = regex.Matches(linea);
+            if (datosNumericos.Count == 0) return;
 
             try
             {
-                int id = Convert.ToInt32(datosNumericos[0]);
-                double horasComida = Convert.ToDouble(datosNumericos[1]);
-                int vecesComida = Convert.ToInt32(datosNumericos[2]);
+                double horasComida = Convert.ToDouble(datosNumericos[0].Groups[1].Value);
+                double vecesdoub = Convert.ToDouble(datosNumericos[1].Groups[1].Value);
+                int vecesComida = Convert.ToInt32(vecesdoub);
+                double idDoub = Convert.ToDouble(datosNumericos[2].Groups[1].Value);
+                int id = Convert.ToInt32(idDoub);
                 CsvUtileria.GuardarEnCsv(id, horasComida, vecesComida);
             }
             catch (Exception)
             {
-                //MessageBox.Show("Hubo un error al recibir los datos");
+
             }
+            
         }
 
         public static void CerrarPuerto()

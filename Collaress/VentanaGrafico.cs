@@ -23,6 +23,13 @@ namespace Collaress
 
         private void VentanaGrafico_Load(object sender, EventArgs e)
         {
+            string carpetaDeCsvs = CsvUtileria.csvPath;
+            if (!Directory.Exists(carpetaDeCsvs))
+            {
+                Directory.CreateDirectory(carpetaDeCsvs);
+            }
+
+
             puerto.NewLine = "\r\n";
             ComunicacionSerial.SetPuerto(puerto);
             ComunicacionSerial.AbrirPuerto();

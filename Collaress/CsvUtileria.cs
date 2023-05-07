@@ -8,7 +8,7 @@ namespace Utileria
     internal class CsvUtileria
     {
         //TODO tal vez hacer una clase en comun con los valores que van a usar varias clases
-        public static string csvPath = @"..\..\csvs\";
+        public static string csvPath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + @"\MonitorreX\";
 
         private static int maxNumDeDatos = 10;
 
